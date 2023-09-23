@@ -22,11 +22,11 @@ def create_chatroom(title, max_participants):
     new_room = ChatRoom(title, max_participants)
     rooms[roomname] = new_room
     return roomname
-def join_room(roomname, client_socket, addr):  # client_socket parameter added
+def join_room(roomname, client_socket, addr):  
     room = rooms.get(roomname)
     client_key = f"{addr[0]}:{addr[1]}"
     if room and len(room.participants) < room.max_participants and client_key not in room.participants:
-        client_obj = ChatClient(addr[0], addr[1], client_socket)  # pass client_socket here
+        client_obj = ChatClient(addr[0], addr[1], client_socket) 
         room.participants[client_obj.unique_key()] = client_obj
         return f"Joined room {roomname}."
     elif room and client_key in room.participants:
